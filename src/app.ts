@@ -51,6 +51,11 @@ class App {
     this.app.set('view engine', 'pug');
   }
 
+  public getApp(): express.Express {
+
+	return this.app;
+  }
+
 }
 
 export { App };
