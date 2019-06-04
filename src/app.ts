@@ -6,12 +6,16 @@ import compression from 'compression';  // compresses requests
 // import flash from 'express-flash';
 
 import morgan from 'morgan';
+import { StartController } from './start/start.controller';
+import { PostsController } from './posts/posts.controller';
 
-class App {
+declare type Controllers = StartController | PostsController;
+
+export class App {
   public app: express.Express;
   public port: number;
 
-  constructor(controllers: any, port: number) {
+  constructor(controllers: Array<Controllers>, port: number) {
     this.app = express();
     this.port = port;
 
@@ -44,7 +48,7 @@ class App {
     );
   }
 
-  private initializeControllers(controllers: any): void {
+  private initializeControllers(controllers: Array<Controllers>): void {
     controllers.forEach((controller: any) => {
       this.app.use('/', controller.router);
     });
@@ -57,4 +61,3 @@ class App {
 
 }
 
-export { App };
