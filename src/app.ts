@@ -6,8 +6,8 @@ import compression from 'compression';  // compresses requests
 // import flash from 'express-flash';
 
 import morgan from 'morgan';
-import { StartController } from './start/start.controller';
-import { PostsController } from './posts/posts.controller';
+import { StartController } from './controllers/start/start.controller';
+import { PostsController } from './controllers/posts/posts.controller';
 
 declare type Controllers = StartController | PostsController;
 
