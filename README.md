@@ -15,6 +15,7 @@ Inspired by:
 
 Follow steps:
 - yarn 
+- yarn config set scripts-prepend-node-path true
 - yarn run build
 - yarn run serve
 - open http://localhost:3000/
