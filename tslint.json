@@ -1,0 +1,64 @@
+{
+  "linterOptions": {
+    "typeCheck": true
+  },
+  "extends": [
+    //"../../node_modules/tslint-angular"
+    "tslint"
+  ],
+  "rules": {
+    "no-debugger": false,
+    "max-line-length": [true, 300],
+    "align": [true, "statements"],
+    "array-type": [true, "generic"],
+    "ban": false,
+    "import-spacing": false,
+    "indent": [true, "spaces", 4],
+    "max-classes-per-file": false,
+    "member-ordering": [true,
+      "public-before-private",
+      "static-before-instance",
+      "variables-before-functions"
+    ],
+    "no-any": false,
+    "no-console": [true,
+      "log",
+      "info",
+      "debug",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-constructor-vars": false,
+    "no-default-export": true,
+    "no-duplicate-variable": true,
+    "no-inferrable-types": false,
+    "no-require-imports": true,
+    "no-var-requires": true,
+    "prefer-const": [true, {"destructuring": "all"}],
+    "quotemark": [true, "single", "jsx-double"],
+    "semicolon": true,
+    "switch-default": false,
+    "trailing-comma": {
+      "multiline": "never",
+      "singleline": "never"
+    },
+    "typedef": [true,
+      "call-signature",
+      "property-declaration"
+    ],
+    "whitespace": [true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type",
+      "check-module"
+    ],
+    "interface-over-type-literal": false
+    // TODO: We have a terrible mix of app- and wk- prefices. Resolve this
+//    "directive-selector": [true, "attribute", "seed", "ux", "wk", "camelCase"],
+//    "component-selector": [true, "element", "seed", "kebab-case"]
+
+  }
+}
