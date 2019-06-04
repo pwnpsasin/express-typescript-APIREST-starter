@@ -28,6 +28,10 @@ class App {
     });
   }
 
+  public getApp(): express.Express {
+    return this.app;
+  }
+
   private initializeMiddlewares(): void {
     this.app.use(compression());
     this.app.use(bodyParser.json());
@@ -49,11 +53,6 @@ class App {
   private initializeRenderEngine(): void {
     this.app.set('views', join(__dirname, '../views'));
     this.app.set('view engine', 'pug');
-  }
-
-  public getApp(): express.Express {
-
-	return this.app;
   }
 
 }

@@ -12,7 +12,7 @@ export class StartController {
     this.router.get(this.path, this.welcome);
   }
 
-   public welcome = (request: Request, response: Response) => {
+  public welcome = (request: Request, response: Response) => {
 
     response.render('home', {
       title: 'API Examples'
