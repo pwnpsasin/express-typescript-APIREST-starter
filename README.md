@@ -5,3 +5,10 @@ Inspired by:
  - https://github.com/Microsoft/TypeScript-Node-Starter.git
  - https://github.com/mwanago/express-typescript.git
 
+## Fast run
+
+Follow steps:
+- yarn 
+- yarn run build
+- yran run serve
+- open http://localhost:3000/
