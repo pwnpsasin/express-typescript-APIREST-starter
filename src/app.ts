@@ -1,3 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config({path: '.env'});
+
+// tslint:disable-next-line
+console.log(process.env.APPTITLE);
+
+
 import * as bodyParser from 'body-parser';
 import express from 'express';
 import { join } from 'path';
@@ -5,11 +12,15 @@ import compression from 'compression';  // compresses requests
 import session from 'express-session';
 import lusca from 'lusca';
 // import flash from 'express-flash';
+import methodOverride from 'method-override';
 
 import morgan from 'morgan';
+
+// controller's imports
 import { StartController } from './controllers/start/start.controller';
 import { PostsController } from './controllers/posts/posts.controller';
 
+// controller's definitions
 declare type Controllers = StartController | PostsController;
 
 export class App {
@@ -29,7 +40,7 @@ export class App {
   public listen(): void {
     this.app.listen(this.port, () => {
       // tslint:disable-next-line
-      console.log(`API listening on the port ${this.port}`);
+      console.log(`${process.env.APPTITLE} listening on the port ${this.port}`);
     });
   }
 
@@ -53,6 +64,12 @@ export class App {
     this.app.use(lusca.xframe('SAMEORIGIN'));
     this.app.use(lusca.xssProtection(true));
 
+    // override
+    this.app.use(methodOverride('_method'));                   // In query
+    this.app.use(methodOverride('X-HTTP-Method'));             // Microsoft
+    this.app.use(methodOverride('X-HTTP-Method-Override'));    // Google/GData
+    this.app.use(methodOverride('X-Method-Override'));         // IBM
+  
     // this.app.use(flash());
 
     // logger on console
