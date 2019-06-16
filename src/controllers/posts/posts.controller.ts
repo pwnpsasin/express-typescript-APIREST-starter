@@ -19,14 +19,28 @@ export class PostsController {
 
   public intializeRoutes(): void {
     this.router.get(this.path, this.getAllPosts);
-    this.router.post(this.path, this.createAPost);
+    this.router.get(this.path + '/:id', this.getPost);
+    this.router.post(this.path, this.createPost);
   }
-
+/**
+ * Get all posts
+ */
   public getAllPosts = (request: Request, response: Response) => {
     response.send(this.posts);
   }
 
-  public createAPost = (request: Request, response: Response) => {
+  /**
+   * Get one post by id
+   */
+  public getPost = (request: Request, response: Response) => {
+    // FIXME (psasin): get one record
+    response.send(request.params);
+  }
+
+  /**
+   * Create one post
+   */
+  public createPost = (request: Request, response: Response) => {
     const post: Post = request.body;
     this.posts.push(post);
     response.send(post);
