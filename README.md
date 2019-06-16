@@ -7,7 +7,7 @@ Inspired by:
 
 ## Require
 
-- Node.JS 10.16.0 or 11.15.0 or 12.3.1
+- Node.JS 10.16.0 or 11.15.0 or 12.4.0
 - TypeScript 3.5.1
 - Express 4.17.1
 
@@ -16,9 +16,9 @@ Inspired by:
 Follow steps:
 - yarn 
 - yarn config set scripts-prepend-node-path true
-- yarn run build
-- yarn run serve
-- open http://localhost:3000/
+- yarn build
+- yarn serve
+- open http://localhost:3000/ or e.g. request GET - http://localhost:3000/posts
 
 ## Project Structure
 The most obvious difference in a TypeScript + Node project is the folder structure.
