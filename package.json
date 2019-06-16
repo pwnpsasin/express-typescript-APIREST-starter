@@ -26,7 +26,9 @@
     "copy-static-assets": "ts-node copyStaticAssets.ts",
     "debug": "npm run build && npm run watch-debug",
     "serve-debug": "nodemon --inspect dist/server.js",
-    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\"",
+    "todo": "leasot 'src/**/*.ts'",
+    "todo-ci": "leasot -x --reporter markdown 'src/**/*.ts' > TODO.md"
   },
   "dependencies": {
     "@types/express-flash": "0.0.0",
@@ -43,6 +45,7 @@
     "express-validator": "^5.3.1",
     "fbgraph": "^1.4.4",
     "jsonwebtoken": "^8.5.1",
+    "leasot": "^7.4.0",
     "lodash": "^4.17.11",
     "logger": "0.0.1",
     "lusca": "^1.6.1",
@@ -50,6 +53,9 @@
     "morgan": "^1.9.1",
     "nanoid": "^2.0.3",
     "nodemailer": "^6.2.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
