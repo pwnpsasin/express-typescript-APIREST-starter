@@ -2,7 +2,8 @@ import * as bodyParser from 'body-parser';
 import express from 'express';
 import { join } from 'path';
 import compression from 'compression';  // compresses requests
-// import { session } from 'express-session';
+import session from 'express-session';
+import lusca from 'lusca';
 // import flash from 'express-flash';
 
 import morgan from 'morgan';
@@ -40,7 +41,21 @@ export class App {
     this.app.use(compression());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+
+    // session
+    this.app.use(session({
+        secret: '0740600a-9050-11e9-8e32-1c1bb5508a2e',
+        resave: true,
+        saveUninitialized: true
+    }));
+
+    // security
+    this.app.use(lusca.xframe('SAMEORIGIN'));
+    this.app.use(lusca.xssProtection(true));
+
     // this.app.use(flash());
+
+    // logger on console
     this.app.use(morgan('dev'));
 
     this.app.use(
