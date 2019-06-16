@@ -28,7 +28,7 @@ export class App {
   public listen(): void {
     this.app.listen(this.port, () => {
       // tslint:disable-next-line
-      console.log(`App listening on the port ${this.port}`);
+      console.log(`API listening on the port ${this.port}`);
     });
   }
 
