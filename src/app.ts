@@ -13,6 +13,7 @@ import session from 'express-session';
 import lusca from 'lusca';
 // import flash from 'express-flash';
 import methodOverride from 'method-override';
+import errorHandler from 'errorhandler';
 
 import morgan from 'morgan';
 
@@ -26,15 +27,19 @@ declare type Controllers = StartController | PostsController;
 export class App {
   public app: express.Express;
   public port: number;
+  private isProduction: boolean;
 
   constructor(controllers: Array<Controllers>, port: number) {
     this.app = express();
     this.port = port;
 
+    //Configure isProduction variable
+    this.isProduction = process.env.NODE_ENV === 'production';
+
+
     this.initializeRenderEngine();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
-
   }
 
   public listen(): void {
@@ -70,11 +75,18 @@ export class App {
     this.app.use(methodOverride('X-HTTP-Method-Override'));    // Google/GData
     this.app.use(methodOverride('X-Method-Override'));         // IBM
   
+
+    if (!this.isProduction) {
+      this.app.use(errorHandler());
+    }
+
     // this.app.use(flash());
 
     // logger on console
     this.app.use(morgan('dev'));
 
+
+    
     this.app.use(
       express.static(join(__dirname, 'public'), { maxAge: 31557600000 })
     );
@@ -90,6 +102,4 @@ export class App {
     this.app.set('views', join(__dirname, '../views'));
     this.app.set('view engine', 'pug');
   }
-
 }
-
