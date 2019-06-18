@@ -1,5 +1,5 @@
 import { Response, Request, Router } from 'express';
-import { Post } from './post.interface';
+import { Post } from './post-interface';
 
 export class PostsController {
   public path = '/posts';

@@ -15,11 +15,17 @@ import errorHandler from 'errorhandler';
 import morgan from 'morgan';
 
 // controller's imports
-import { StartController } from './controllers/start/start.controller';
-import { PostsController } from './controllers/posts/posts.controller';
+import { StartController } from './controllers/start/start-controller';
+import { HeartbeatController } from './controllers/heartbeat/heartbeat-controller';
+import { AuthController } from './controllers/auth/auth-controller';
+import { PostsController } from './controllers/posts/posts-controller';
 
 // controller's definitions
-declare type Controllers = StartController | PostsController;
+declare type Controllers = 
+HeartbeatController | 
+StartController | 
+PostsController | 
+AuthController;
 
 export class App {
   public app: express.Express;
