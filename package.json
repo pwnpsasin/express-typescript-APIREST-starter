@@ -31,8 +31,6 @@
     "todo-ci": "leasot -x --reporter markdown 'src/**/*.ts' > TODO.md"
   },
   "dependencies": {
-    "@types/express-flash": "0.0.0",
-    "@types/passport": "^1.0.0",
     "async": "^3.0.1",
     "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
@@ -62,6 +60,8 @@
     "request-promise": "^4.2.4"
   },
   "devDependencies": {
+    "@types/express-flash": "0.0.0",
+    "@types/passport": "^1.0.0",
     "@types/async": "^3.0.0",
     "@types/bcrypt-nodejs": "^0.0.30",
     "@types/bluebird": "^3.5.27",
