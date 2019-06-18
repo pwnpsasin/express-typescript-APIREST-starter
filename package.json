@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run serve",
-    "build": "npm run clean && npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets && npm run doc",
+    "build": "npm run clean && npm run build-sass && npm run build-ts && npm run tslint && npm run test && npm run copy-static-assets && npm run doc",
     "doc": "typedoc --out dist/public/docs/api --ignoreCompilerErrors src",
     "serve": "node dist/server.js",
     "watch-node": "nodemon dist/server.js",

@@ -1,9 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config({path: '.env'});
 
-// tslint:disable-next-line
-console.log(process.env.APPTITLE);
-
 
 import * as bodyParser from 'body-parser';
 import express from 'express';
