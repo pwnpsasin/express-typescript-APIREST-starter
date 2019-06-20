@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config({path: '.env'});
 
-
 import * as bodyParser from 'body-parser';
 import express from 'express';
 import { join } from 'path';
@@ -19,6 +18,8 @@ import { StartController } from './controllers/start/start-controller';
 import { HeartbeatController } from './controllers/heartbeat/heartbeat-controller';
 import { AuthController } from './controllers/auth/auth-controller';
 import { PostsController } from './controllers/posts/posts-controller';
+import { Auth } from './config/passport/auth';
+
 
 // controller's definitions
 declare type Controllers = 
@@ -39,7 +40,8 @@ export class App {
     //Configure isProduction variable
     this.isProduction = process.env.NODE_ENV === 'production';
 
-
+    this.initLogger();
+    this.initializeAuth();
     this.initializeRenderEngine();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
@@ -56,6 +58,15 @@ export class App {
     return this.app;
   }
 
+  public initializeAuth(): void {
+    const auth = new Auth();
+    this.app.use(auth.initialize());
+  }
+
+  private initLogger(): void {
+    // logger on console
+    this.app.use(morgan('dev'));
+  }
   private initializeMiddlewares(): void {
     this.app.use(compression());
     this.app.use(bodyParser.json());
@@ -84,10 +95,6 @@ export class App {
     }
 
     // this.app.use(flash());
-
-    // logger on console
-    this.app.use(morgan('dev'));
-
 
     
     this.app.use(

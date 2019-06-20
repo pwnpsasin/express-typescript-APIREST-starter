@@ -11,9 +11,11 @@ import { App } from './app';
 
 const app = new App(
   [
+    // before authorization
     new HeartbeatController(),
     new StartController(),
     new AuthController(),
+    // after authorization
     new PostsController()
   ],
   parseInt(process.env.PORT, 10),
