@@ -1,0 +1,33 @@
+#!/bin/bash
+echo "Running build-run ..."
+chown -R node:node /home/node || exit 1
+export NPM_CONFIG_PREFIX=/home/node/.npm-global
+export PATH=$PATH:/home/node/.npm-global/bin
+export NG_CLI_ANALYTICS=ci
+
+
+
+echo "npm config:"
+su -c 'npm config list' node
+
+# npm install fails frequentyl due to network errors so we try twice
+su -c 'npm install -g --unsafe-perm --no-progress @angular/cli || npm install -g --unsafe-perm --no-progress @angular/cli' node || exit 1
+su -c 'npm install --no-progress || npm install --no-progress' node || exit 1
+
+# host node_modules is copied into a container (linux), in a case when container is hosted on windows box we need to recompile some native node modules
+su -c 'npm rebuild node-sass' node || exit
+
+# full build with tests
+su -c 'npm run build' node || exit 1
+
+# remove development dependencies
+# su -c 'npm prune --production' node || exit 1
+# install spm module
+# su -c 'npm install --no-progress spm-agent-nodejs || npm install --no-progress spm-agent-nodejs' node || exit 1
+
+
+# build application archive containing only necessary files
+# tar cf /app/app.tar package.json package-lock.json dist node_modules || exit 1
+
+# publish to NPM Repository
+# su -c 'cd dist && npm publish --verbose' node || exit 1

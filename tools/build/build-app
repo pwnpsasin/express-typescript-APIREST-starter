@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# TODO: local registry
+docker pull xyz.io/node-chrome || exit 1
+NODE_CHROME_ID=`docker ps -aq -f name=^/node-chrome$` || exit 1
+[ ! -z "NODE_CHROME_ID" ] && (docker rm -f node-chrome || exit 1)
+docker create -t --mount type=tmpfs,destination=/tmp --mount type=bind,source=$PWD,destination=/app --name node-chrome xyz.io/node-chrome bash || exit 1
+
+if [ -e ~/.npmrc ]; then
+    docker cp ~/.npmrc node-chrome:/home/node || exit 1
+else
+    echo "ERROR: .npmrc file is missing" && exit 1
+fi
+docker cp . node-chrome:/home/node/app || exit 1
+docker start node-chrome  || exit 1
+docker exec -t node-chrome bash tools/build/build-run || exit 1
+docker rm -f node-chrome || exit 1
+
+
+
