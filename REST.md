@@ -1,5 +1,37 @@
 # Additional parameters of API REST
 
+### Simulation delay on answer of API
+Use ?delay=5 - answer from API after 5 seconds
+
+Use ?delay=random - answer from API after random time between 0.2 and 3s 
+
+```
+var getRandomInteger = function(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+```
+
+```
+app.all("/api/*", [
+	function(req, res, next) {
+		if (req.query && req.query.delay) {
+			var delay = req.query.delay;
+			if(delay === 'random'){
+				var random = getRandomInteger(200, 3000);
+				return setTimeout(next, random);
+			}
+			if(isNaN(delay)){
+				return next();
+			}
+			return setTimeout(next, req.query.delay * 1000);
+		}
+		return next();
+	}
+]);
+```
+
 ### Filter
 
 Use `.` to access deep properties
