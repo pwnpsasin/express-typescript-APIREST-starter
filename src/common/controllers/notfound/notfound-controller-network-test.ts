@@ -1,22 +1,29 @@
-jest.unmock('supertest').unmock('../../../app');
-jest.setTimeout(30000);
+// jest.unmock('supertest').unmock('../../../app');
+// jest.setTimeout(30000);
 
 import request from 'supertest';
 import { App } from '../../../app';
+import express from 'express';
 import { NotFoundController } from './notfound-controller';
 
-const app = new App([new NotFoundController()], [], [], 3000);
+// const app = new App([new NotFoundController()], [], [], 3000);
+
+const app = express();
+app.use(new NotFoundController().router);
 
 describe('GET /xyz-not-exists', () => {
 
-    beforeAll((done) => {
+    it('should return 404 Not Found', async (done) => {
+
+        const res = await request(app)
+            .get('/axx-aaaa')
+            //.set('Accept', 'application/json');
+
+        //expect(res.header['content-type']).toEqual(expect.stringContaining('json'));
+        expect(res.status).toEqual(404);
         done();
     });
 
-    it('should return 404 Not Found', (done) => {
-        request(app.getApp())
-            .get('/xyz-not-exists')
-            .expect(404, done);
-    });
 
 });
+
