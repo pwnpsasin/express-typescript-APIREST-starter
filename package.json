@@ -1,6 +1,6 @@
 {
   "name": "express-typescript-APIREST-starter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A starting point for Node.js express apps with TypeScript",
   "repository": {
     "type": "git",
