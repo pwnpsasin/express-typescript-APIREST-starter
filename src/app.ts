@@ -20,13 +20,14 @@ import { HeartbeatController } from './common/controllers/heartbeat/heartbeat-co
 import { AuthController } from './common/controllers/auth/auth-controller';
 import { PostsController } from './v1/controllers/posts/posts-controller';
 import { Auth } from './config/passport/auth';
+import { NotFoundController } from './common/controllers/notfound/notfound-controller';
 
 
 // controller's definitions
 
 declare type ControllersZero = HeartbeatController | StartController;
 
-declare type ControllersV1 =  AuthController | PostsController;
+declare type ControllersV1 = AuthController | PostsController;
 declare type ControllersV2 = AuthController | PostsController;
 
 export class App {
@@ -53,6 +54,7 @@ export class App {
     this.initializeControllersZero(controllersZero);
     this.initializeControllersV1(controllersV1);
     this.initializeControllersV2(controllersV2);
+    this.initializeNotFound();
   }
 
   public listen(): void {
@@ -71,6 +73,9 @@ export class App {
     this.app.use(auth.initialize());
   }
 
+  public initializeNotFound(): void {
+    this.app.use(new NotFoundController().router);
+  }
   private initLogger(): void {
     // logger on console
     this.app.use(morgan('dev'));

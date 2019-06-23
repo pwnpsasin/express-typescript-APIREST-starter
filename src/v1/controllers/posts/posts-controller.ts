@@ -26,7 +26,14 @@ export class PostsController {
  * Get all posts
  */
   public getAllPosts = (request: Request, response: Response) => {
-    response.send(this.posts);
+    const answer = {
+      'page': 2,
+      'per_page': 3,
+      'total': 12,
+      'total_pages': 4,
+      'data': this.posts
+    };
+    response.send(answer);
   }
 
   /**
