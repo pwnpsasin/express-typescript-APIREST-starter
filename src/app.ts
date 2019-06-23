@@ -12,6 +12,7 @@ import methodOverride from 'method-override';
 import errorHandler from 'errorhandler';
 
 import morgan from 'morgan';
+import cors from 'cors';
 
 // controller's imports
 import { StartController } from './common/controllers/start/start-controller';
@@ -76,6 +77,7 @@ export class App {
   }
   private initializeMiddlewares(): void {
     this.app.use(compression());
+    this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
 
