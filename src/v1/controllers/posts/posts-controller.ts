@@ -33,7 +33,7 @@ export class PostsController {
       'total_pages': 4,
       'data': this.posts
     };
-    response.send(answer);
+    response.json(answer);
   }
 
   /**
@@ -41,7 +41,7 @@ export class PostsController {
    */
   public getPost = (request: Request, response: Response) => {
     // FIXME (psasin): get one record
-    response.send(request.params);
+    response.json(request.params);
   }
 
   /**

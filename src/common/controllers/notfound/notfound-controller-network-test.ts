@@ -2,11 +2,8 @@
 // jest.setTimeout(30000);
 
 import request from 'supertest';
-import { App } from '../../../app';
 import express from 'express';
 import { NotFoundController } from './notfound-controller';
-
-// const app = new App([new NotFoundController()], [], [], 3000);
 
 const app = express();
 app.use(new NotFoundController().router);
