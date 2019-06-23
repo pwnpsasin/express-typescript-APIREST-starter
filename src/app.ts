@@ -25,10 +25,10 @@ import { NotFoundController } from './common/controllers/notfound/notfound-contr
 
 // controller's definitions
 
-declare type ControllersZero = HeartbeatController | StartController;
+declare type ControllersZero = HeartbeatController | StartController | NotFoundController;
 
-declare type ControllersV1 = AuthController | PostsController;
-declare type ControllersV2 = AuthController | PostsController;
+declare type ControllersV1 = AuthController | PostsController | NotFoundController;
+declare type ControllersV2 = AuthController | PostsController | NotFoundController;
 
 export class App {
   public app: express.Express;
