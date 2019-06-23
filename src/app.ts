@@ -14,26 +14,31 @@ import errorHandler from 'errorhandler';
 import morgan from 'morgan';
 
 // controller's imports
-import { StartController } from './controllers/start/start-controller';
-import { HeartbeatController } from './controllers/heartbeat/heartbeat-controller';
-import { AuthController } from './controllers/auth/auth-controller';
-import { PostsController } from './controllers/posts/posts-controller';
+import { StartController } from './common/controllers/start/start-controller';
+import { HeartbeatController } from './common/controllers/heartbeat/heartbeat-controller';
+import { AuthController } from './common/controllers/auth/auth-controller';
+import { PostsController } from './v1/controllers/posts/posts-controller';
 import { Auth } from './config/passport/auth';
 
 
 // controller's definitions
-declare type Controllers = 
-HeartbeatController | 
-StartController | 
-PostsController | 
-AuthController;
+
+declare type ControllersZero = HeartbeatController | StartController;
+
+declare type ControllersV1 =  AuthController | PostsController;
+declare type ControllersV2 = AuthController | PostsController;
 
 export class App {
   public app: express.Express;
   public port: number;
   private isProduction: boolean;
 
-  constructor(controllers: Array<Controllers>, port: number) {
+  constructor(
+    controllersZero: Array<ControllersZero>, 
+    controllersV1: Array<ControllersV1>,
+    controllersV2: Array<ControllersV2>,
+    port: number) {
+
     this.app = express();
     this.port = port;
 
@@ -44,7 +49,9 @@ export class App {
     this.initializeAuth();
     this.initializeRenderEngine();
     this.initializeMiddlewares();
-    this.initializeControllers(controllers);
+    this.initializeControllersZero(controllersZero);
+    this.initializeControllersV1(controllersV1);
+    this.initializeControllersV2(controllersV2);
   }
 
   public listen(): void {
@@ -102,9 +109,21 @@ export class App {
     );
   }
 
-  private initializeControllers(controllers: Array<Controllers>): void {
+  private initializeControllersZero(controllers: Array<ControllersZero>): void {
     controllers.forEach((controller: any) => {
       this.app.use('/', controller.router);
+    });
+  }
+
+  private initializeControllersV1(controllers: Array<ControllersV1>): void {
+    controllers.forEach((controller: any) => {
+      this.app.use('/api/v1/', controller.router);
+    });
+  }
+
+  private initializeControllersV2(controllers: Array<ControllersV2>): void {
+    controllers.forEach((controller: any) => {
+      this.app.use('/api/v2/', controller.router);
     });
   }
 

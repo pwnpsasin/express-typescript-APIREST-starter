@@ -1,8 +1,8 @@
 import request from 'supertest';
-import { App } from '../../app';
+import { App } from '../../../app';
 import { StartController } from './start-controller';
 
-const app = new App( [new StartController()], 3000);
+const app = new App( [new StartController()], [], [], 3000);
 
 describe('GET /', () => {
   

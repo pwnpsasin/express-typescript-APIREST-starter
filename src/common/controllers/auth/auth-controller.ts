@@ -1,6 +1,6 @@
 import { Response, Request, Router, NextFunction } from 'express';
 // import { Post } from './post.interface';
-import  { Auth } from '../../config/passport/auth';
+import  { Auth } from '../../../config/passport/auth';
 import { pick } from 'lodash';
 
 export class AuthController {
