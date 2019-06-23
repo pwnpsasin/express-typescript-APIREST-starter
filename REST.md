@@ -1,5 +1,9 @@
 # Additional parameters of API REST
 
+### Supported methods
+
+GET, POST, PUT, PATCH, DELETE
+
 ### Simulation delay on answer of API
 Use ?delay=5 - answer from API after 5 seconds
 
