@@ -13,7 +13,7 @@ describe('GET /xyz-not-exists', () => {
     it('should return 404 Not Found', async (done) => {
 
         const res = await request(app)
-            .get('/axx-aaaa')
+            .get('/axx-aaaa');
             //.set('Accept', 'application/json');
 
         //expect(res.header['content-type']).toEqual(expect.stringContaining('json'));
