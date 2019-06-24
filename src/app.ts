@@ -135,7 +135,8 @@ export class App {
   }
 
   private initializeRenderEngine(): void {
-    this.app.set('views', join(__dirname, '../views'));
+    this.app.locals.title = process.env.APPTITLE;
+    this.app.set('views', join(__dirname, 'views'));
     this.app.set('view engine', 'pug');
   }
 }

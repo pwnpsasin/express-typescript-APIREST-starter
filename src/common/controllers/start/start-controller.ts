@@ -14,9 +14,7 @@ export class StartController {
 
   public welcome = (request: Request, response: Response) => {
 
-    response.render('home', {
-      title: 'API Examples'
-    });
+    response.render('home', {});
   }
 }
 
