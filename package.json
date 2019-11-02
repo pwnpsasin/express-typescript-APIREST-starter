@@ -58,7 +58,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
     "leasot": "^7.5.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "logger": "0.0.1",
     "lusca": "^1.6.1",
     "method-override": "^3.0.0",
